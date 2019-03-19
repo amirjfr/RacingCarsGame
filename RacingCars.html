@@ -13,6 +13,7 @@ var carSpeed = 10;
 var carY = 2;
 var car1Score = 0;
 var car2Score = 0;
+var winScreen = false;
 
 window.onload = function() {
     canvas = document.getElementById("game canvas");
@@ -39,16 +40,20 @@ function drawCar (carColor, wheelsColor, x, y) {
 }
 
 function updateScore() {
-
+if(!winScreen) {
 if (carX > carY) {
 car1Score += 1;
 }
 else {
 car2Score += 1;
 }
+    winScreen = true; }
 }
 
+
+
 function resetCars() {
+winScreen = false;
 carX = 2;
 carY = 2;
 carSpeed = 10;
@@ -56,38 +61,51 @@ carSpeed = 10;
 
 
 
-window.addEventListener("keydown", moveSomething, false);
+window.addEventListener("keydown", moveCars, false);
 
-function moveSomething(e) {
+function moveCars(e) {
+    if (!winScreen) {
     switch(e.keyCode) {
-        case 37:
+        case 68:
     carX += carSpeed;
-            break;
-        case 38:
-    carY += carSpeed;
             break;
         case 39:
     carY += carSpeed;
             break;
-        case 40:
-    carY += carSpeed;
-            break;
+    }
     }
 
 
     if(carX >= 700 || carY >= 700) {
     carSpeed = 0;
     updateScore();
-    resetCars();
+
 
     }
 }
 
 
+function resetScores() {
+    car1Score = 0;
+    car2Score = 0;
+}
+
+
+
 
 function drawEverything() {
 
+    if (winScreen) {
+    canvasContext.fillStyle = 'Black';
+    canvasContext.fillRect(0,0,canvas.width,canvas.height);
+    canvasContext.fillStyle = 'White';
+    canvasContext.font = "40px Impact"
+    if (carX > carY) {
+    canvasContext.fillText("Yellow car wins", 300,50);}
+     if (carX < carY) {
+    canvasContext.fillText("Blue car wins", 300,50);}
 
+    } else {
     canvasContext.fillStyle = 'DimGrey';
     canvasContext.fillRect(0,0,canvas.width,canvas.height);
     canvasContext.fillStyle = 'Lime';
@@ -104,15 +122,22 @@ function drawEverything() {
     drawCar('yellow','black', carX, 130);
     drawCar('blue','black', carY, 450);
 
-    canvasContext.font = "30px Arial"
-    canvasContext.fillText("Score " + car1Score, 50,50);
-    canvasContext.fillText("Score " + car2Score, 50,350);
-
+    canvasContext.font = "40px Impact"
+    canvasContext.fillText("Score " + car1Score, 300,50);
+    canvasContext.fillText("Score " + car2Score, 300,350);
+    }
 
 
 
 
 }
 
-</script> 
+</script>
+
+<body>
+    <button onClick="resetCars();">Continue</button>
+    <button onClick="resetScores();">Reset Scores</button>
+
+
+</body> 
  </html>
