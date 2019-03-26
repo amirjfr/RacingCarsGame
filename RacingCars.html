@@ -98,12 +98,12 @@ function drawEverything() {
     if (winScreen) {
     canvasContext.fillStyle = 'Black';
     canvasContext.fillRect(0,0,canvas.width,canvas.height);
-    canvasContext.fillStyle = 'White';
+    canvasContext.fillStyle = 'Yellow';
     canvasContext.font = "40px Impact"
     if (carX > carY) {
-    canvasContext.fillText("Yellow car wins", 300,50);}
+    canvasContext.fillText("Yellow car wins", 250,300);}
      if (carX < carY) {
-    canvasContext.fillText("Blue car wins", 300,50);}
+    canvasContext.fillText("Blue car wins", 250,300);}
 
     } else {
     canvasContext.fillStyle = 'DimGrey';
@@ -123,8 +123,12 @@ function drawEverything() {
     drawCar('blue','black', carY, 450);
 
     canvasContext.font = "40px Impact"
-    canvasContext.fillText("Score " + car1Score, 300,50);
-    canvasContext.fillText("Score " + car2Score, 300,350);
+    canvasContext.fillText("Score " + car1Score, 320,50);
+    canvasContext.fillText("Score " + car2Score, 320,350);
+    canvasContext.font = "20px Impact"
+    canvasContext.fillText("Press the 'D' key to move the car ", 250,260);
+    canvasContext.fillText("Press the right arrow key to move the car ", 250,580);
+
     }
 
 
